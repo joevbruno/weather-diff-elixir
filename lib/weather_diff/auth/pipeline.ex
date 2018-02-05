@@ -1,6 +1,9 @@
 # The other pipeline will leverage this one, and be defiend in our router. 
 # This pipeline checks for a resource (a user) but does not reject the request if one is not found
 defmodule WeatherDiff.Auth.Pipeline do
+  @moduledoc """
+  Middleware pipeline for router.ex
+  """
   use Guardian.Plug.Pipeline,
     otp_app: :weather_diff,
     error_handler: WeatherDiff.Auth.ErrorHandler,

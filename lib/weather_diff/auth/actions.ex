@@ -1,4 +1,7 @@
 defmodule WeatherDiff.Auth.Actions do
+  @moduledoc """
+  Auth actions: login, signup, etc
+  """
   import Ecto.{Query, Changeset}, warn: false
 
   alias WeatherDiff.Auth.Encryption

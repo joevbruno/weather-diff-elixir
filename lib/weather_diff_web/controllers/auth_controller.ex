@@ -1,6 +1,5 @@
 defmodule WeatherDiffWeb.AuthController do
   use WeatherDiffWeb, :controller
-  require Logger
 
   alias WeatherDiff.Auth.Actions
 
@@ -54,8 +53,6 @@ defmodule WeatherDiffWeb.AuthController do
         {:ok, jwt, _full_claims} =
           user |> WeatherDiff.Auth.Guardian.encode_and_sign(%{}, token_type: :token)
 
-        Logger.debug("Var value: #{inspect(jwt)}")
-        Logger.debug("Var value: #{inspect(user)}")
 
         conn
         |> put_status(:created)

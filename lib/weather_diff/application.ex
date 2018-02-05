@@ -1,4 +1,7 @@
 defmodule WeatherDiff.Application do
+  @moduledoc """
+  Mostly boilerplate file
+  """
   use Application
 
   # See https://hexdocs.pm/elixir/Application.html

@@ -1,4 +1,7 @@
 defmodule WeatherDiff.Features.Locations do
+  @moduledoc """
+  CRUD actions for Locations
+  """
   import Ecto.Query, warn: false
   alias WeatherDiff.Repo
   alias WeatherDiff.Features.Location

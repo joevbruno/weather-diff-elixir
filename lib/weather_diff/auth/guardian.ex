@@ -1,4 +1,7 @@
 defmodule WeatherDiff.Auth.Guardian do
+  @moduledoc """
+  Login strategy tool for Elixir
+  """
   use Guardian, otp_app: :weather_diff
 
   alias WeatherDiff.Repo

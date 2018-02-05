@@ -1,4 +1,7 @@
 defmodule WeatherDiff.Features.Location do
+  @moduledoc """
+  Location Model
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias WeatherDiff.Features.Location

@@ -1,4 +1,7 @@
 defmodule WeatherDiff.Auth.Track do
+  @moduledoc """
+  Track user login attempts
+  """
   require Logger
   # Track a log in event
   def track_log_in(conn, user) do
@@ -49,14 +52,8 @@ defmodule WeatherDiff.Auth.Track do
     # Default values for our API attributes
     user_id = nil
 
-    # If there is a user item, populate the API attributes with its details,
-    # otherwise if there is an auth item grab the email from it
-    cond do
-      user ->
-        user_id = user.id
-
-      _ ->
-        user_id = nil
+    if user do
+      user_id = user.id
     end
 
     # Construct the request body

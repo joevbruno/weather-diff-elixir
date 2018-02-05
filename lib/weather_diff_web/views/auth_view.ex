@@ -1,6 +1,5 @@
 defmodule WeatherDiffWeb.AuthView do
   use WeatherDiffWeb, :view
-  require Logger
 
   def render("login.json", %{
         jwt: jwt,
@@ -23,7 +22,6 @@ defmodule WeatherDiffWeb.AuthView do
   end
 
   def render("signup.json", %{jwt: jwt}) do
-    Logger.debug("VIEW JWT: #{inspect(jwt)}")
     %{token: jwt}
   end
 

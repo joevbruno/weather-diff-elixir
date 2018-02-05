@@ -1,4 +1,7 @@
 defmodule WeatherDiff.Plug.SetCurrentUser do
+  @moduledoc """
+  Set User in conn
+  """
   def init(opts), do: opts
 
   def call(conn, _opts) do

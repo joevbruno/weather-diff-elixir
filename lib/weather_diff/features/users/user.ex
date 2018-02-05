@@ -1,4 +1,7 @@
 defmodule WeatherDiff.Features.User do
+  @moduledoc """
+  User
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias WeatherDiff.Features.User

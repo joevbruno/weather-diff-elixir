@@ -11,6 +11,7 @@ mix credo
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 mix hex.outdated
+mix format
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
