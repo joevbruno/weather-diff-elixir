@@ -7,10 +7,10 @@ defmodule WeatherDiff.Mixfile do
       # apps_path: "apps",
       version: "0.0.1",
       elixir: "~> 1.4",
-      elixirc_paths: elixirc_paths(Mix.env),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers,
+      elixirc_paths: elixirc_paths(Mix.env()),
+      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       # build_embedded: Mix.env == :prod,
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
       # preferred_cli_env: [coveralls: :test]]
@@ -29,14 +29,14 @@ defmodule WeatherDiff.Mixfile do
   def application do
     [
       mod: {WeatherDiff.Application, []},
-      extra_applications: [:logger, :runtime_tools ]
+      extra_applications: [:logger, :runtime_tools]
       # :postgrex, :absinthe, :absinthe_plug, :absinthe_ecto, :poison, :faker, :comeonin, :guardian, :bcrypt_elixir, :httpoison
     ]
   end
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_),     do: ["lib"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
   #
@@ -52,7 +52,6 @@ defmodule WeatherDiff.Mixfile do
       ## ADDED DEPS ##
       {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1.0"},
-
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
       {:absinthe, "~> 1.4.6"},
@@ -61,7 +60,8 @@ defmodule WeatherDiff.Mixfile do
       {:faker, "~> 0.9"},
       {:bcrypt_elixir, "~> 1.0"},
       {:guardian, "~> 1.0"},
-      {:ja_serializer, "~> 0.12.0"}, # github: "vt-elixir/ja_serializer"},
+      # github: "vt-elixir/ja_serializer"},
+      {:ja_serializer, "~> 0.12.0"},
       {:cors_plug, "~> 1.3"},
       {:excoveralls, "~> 0.7.2", only: :test},
       {:oauth, "~> 1.6", github: "tim/erlang-oauth"},
@@ -83,7 +83,6 @@ defmodule WeatherDiff.Mixfile do
       {:proper_case, "~> 1.0.0"},
       {:plug, "~> 1.0"},
       {:corsica, "~> 1.0"},
-
       {:ecto_state_machine, "~> 0.3.0"},
       {:facebook, "~> 0.11.0"},
       {:bodyguard, "~> 2.1"},
@@ -132,7 +131,6 @@ defmodule WeatherDiff.Mixfile do
 
       # # Test only
       # {:mock, "~> 0.1.1", only: :test},
-
     ]
   end
 
@@ -146,7 +144,7 @@ defmodule WeatherDiff.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"],
+      test: ["ecto.create --quiet", "ecto.migrate", "test"],
       "ecto.migrate": ["ecto.migrate", "ecto.dump"]
     ]
   end

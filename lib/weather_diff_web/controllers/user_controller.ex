@@ -4,7 +4,7 @@ defmodule WeatherDiffWeb.UserController do
   alias WeatherDiff.Features.Users
   alias WeatherDiff.Features.User
 
-  action_fallback WeatherDiffWeb.FallbackController
+  action_fallback(WeatherDiffWeb.FallbackController)
 
   def index(conn, _params) do
     users = Users.list_users()
@@ -35,12 +35,12 @@ defmodule WeatherDiffWeb.UserController do
 
   def delete(conn, %{"id" => id}) do
     user = Users.get_user!(id)
+
     with {:ok, %User{}} <- Users.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
   end
 end
-
 
 # defmodule RealWorldWeb.UserController do
 #   use RealWorldWeb, :controller
@@ -93,7 +93,6 @@ end
 #   end
 
 # end
-
 
 # defmodule AuthWeb.UserController do
 #   use AuthWeb, :controller

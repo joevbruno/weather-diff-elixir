@@ -25,13 +25,13 @@ defmodule WeatherDiffWeb.ChannelCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(WeatherDiff.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(WeatherDiff.Repo, {:shared, self()})
     end
+
     :ok
   end
-
 end

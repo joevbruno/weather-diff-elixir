@@ -4,16 +4,37 @@ defmodule WeatherDiffWeb.AuthController do
 
   alias WeatherDiff.Auth.Actions
 
-  action_fallback WeatherDiffWeb.FallbackController
+  action_fallback(WeatherDiffWeb.FallbackController)
 
   def create(conn, params) do
     case Actions.login(params) do
       {:ok, user} ->
-        {:ok, jwt, _full_claims} = user |> WeatherDiff.Auth.Guardian.encode_and_sign(%{}, token_type: :token)
-        %{ email: email, bio: bio, username: username, image: image, first_name: first_name, last_name: last_name } = user
+        {:ok, jwt, _full_claims} =
+          user |> WeatherDiff.Auth.Guardian.encode_and_sign(%{}, token_type: :token)
+
+        %{
+          email: email,
+          bio: bio,
+          username: username,
+          image: image,
+          first_name: first_name,
+          last_name: last_name
+        } = user
+
         conn
         |> put_status(:created)
-        |> render(WeatherDiffWeb.AuthView, "login.json", jwt: jwt, email: email, bio: bio, username: username, image: image, first_name: first_name, last_name: last_name)
+        |> render(
+          WeatherDiffWeb.AuthView,
+          "login.json",
+          jwt: jwt,
+          email: email,
+          bio: bio,
+          username: username,
+          image: image,
+          first_name: first_name,
+          last_name: last_name
+        )
+
       {:error, message} ->
         conn
         |> put_status(401)
@@ -30,12 +51,16 @@ defmodule WeatherDiffWeb.AuthController do
   def sign_up(conn, %{"user" => user_params}) do
     case Actions.register(user_params) do
       {:ok, user} ->
-        {:ok, jwt, _full_claims} = user |> WeatherDiff.Auth.Guardian.encode_and_sign(%{}, token_type: :token)
-        Logger.debug "Var value: #{inspect(jwt)}"
-        Logger.debug "Var value: #{inspect(user)}"
+        {:ok, jwt, _full_claims} =
+          user |> WeatherDiff.Auth.Guardian.encode_and_sign(%{}, token_type: :token)
+
+        Logger.debug("Var value: #{inspect(jwt)}")
+        Logger.debug("Var value: #{inspect(user)}")
+
         conn
         |> put_status(:created)
         |> render(WeatherDiffWeb.AuthView, "signup.json", jwt: jwt)
+
       {:error, changeset} ->
         render(conn, WeatherDiffWeb.ChangesetView, "error.json", changeset: changeset)
     end

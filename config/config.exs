@@ -15,8 +15,7 @@ config :weather_diff, WeatherDiffWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "EG9Q7KR68+MIY9bw+6jspgwslrkdz090gqy8etzbH77iry9UIauq/dRTgqGBRRIx",
   render_errors: [view: WeatherDiffWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: WeatherDiff.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: WeatherDiff.PubSub, adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -31,15 +30,15 @@ config :mime, :types, %{
 config :weather_diff, WeatherDiff.Auth.Guardian,
   issuer: "weather_diff",
   secret_key: "tePgNdOFYFF0gWcnl4M0IyE3KL74dkGZBd4+s0ZA465S+qIwHMKjstSTWoewob1L"
-      #  token_module: Guardian.Token.Jwt
+
+#  token_module: Guardian.Token.Jwt
 
 config :weather_diff, WeatherDiff.Auth.Pipeline,
   module: WeatherDiff.Auth.Guardian,
   error_handler: WeatherDiff.Auth.ErrorHandler
 
-config :phoenix, :format_encoders,
-  "json-api": Poison
+config :phoenix, :format_encoders, "json-api": Poison
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

@@ -63,7 +63,6 @@ config :logger, level: :info
 # which should be versioned separately.
 import_config "prod.secret.exs"
 
-
 # use Mix.Config
 
 # config :project_manager_example, ProjectManagerExampleWeb.Endpoint,

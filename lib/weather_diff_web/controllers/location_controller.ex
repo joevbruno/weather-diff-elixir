@@ -4,7 +4,7 @@ defmodule WeatherDiffWeb.LocationController do
   alias WeatherDiff.Features.Locations
   alias WeatherDiff.Features.Location
 
-  action_fallback WeatherDiffWeb.FallbackController
+  action_fallback(WeatherDiffWeb.FallbackController)
 
   def index(conn, _params) do
     locations = Locations.list_locations()
@@ -35,6 +35,7 @@ defmodule WeatherDiffWeb.LocationController do
 
   def delete(conn, %{"id" => id}) do
     location = Locations.get_location!(id)
+
     with {:ok, %Location{}} <- Locations.delete_location(location) do
       send_resp(conn, :no_content, "")
     end

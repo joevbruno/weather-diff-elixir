@@ -69,7 +69,11 @@ defmodule WeatherDiff.WeatherTest do
     alias WeatherDiff.Weather.Location
 
     @valid_attrs %{city: "some city", cords: "some cords", state: "some state"}
-    @update_attrs %{city: "some updated city", cords: "some updated cords", state: "some updated state"}
+    @update_attrs %{
+      city: "some updated city",
+      cords: "some updated cords",
+      state: "some updated state"
+    }
     @invalid_attrs %{city: nil, cords: nil, state: nil}
 
     def location_fixture(attrs \\ %{}) do

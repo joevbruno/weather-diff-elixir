@@ -11,7 +11,7 @@ defmodule WeatherDiff.Application do
       # Start the Ecto repository
       supervisor(WeatherDiff.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(WeatherDiffWeb.Endpoint, []),
+      supervisor(WeatherDiffWeb.Endpoint, [])
       # Start your own worker by calling: WeatherDiff.Worker.start_link(arg1, arg2, arg3)
       # worker(WeatherDiff.Worker, [arg1, arg2, arg3]),
     ]

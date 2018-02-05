@@ -5,7 +5,11 @@ defmodule WeatherDiffWeb.LocationControllerTest do
   alias WeatherDiff.Weather.Location
 
   @create_attrs %{city: "some city", cords: "some cords", state: "some state"}
-  @update_attrs %{city: "some updated city", cords: "some updated cords", state: "some updated state"}
+  @update_attrs %{
+    city: "some updated city",
+    cords: "some updated cords",
+    state: "some updated state"
+  }
   @invalid_attrs %{city: nil, cords: nil, state: nil}
 
   def fixture(:location) do
@@ -19,26 +23,28 @@ defmodule WeatherDiffWeb.LocationControllerTest do
 
   describe "index" do
     test "lists all locations", %{conn: conn} do
-      conn = get conn, location_path(conn, :index)
+      conn = get(conn, location_path(conn, :index))
       assert json_response(conn, 200)["data"] == []
     end
   end
 
   describe "create location" do
     test "renders location when data is valid", %{conn: conn} do
-      conn = post conn, location_path(conn, :create), location: @create_attrs
+      conn = post(conn, location_path(conn, :create), location: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
-      conn = get conn, location_path(conn, :show, id)
+      conn = get(conn, location_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "city" => "some city",
-        "cords" => "some cords",
-        "state" => "some state"}
+               "id" => id,
+               "city" => "some city",
+               "cords" => "some cords",
+               "state" => "some state"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, location_path(conn, :create), location: @invalid_attrs
+      conn = post(conn, location_path(conn, :create), location: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -46,20 +52,25 @@ defmodule WeatherDiffWeb.LocationControllerTest do
   describe "update location" do
     setup [:create_location]
 
-    test "renders location when data is valid", %{conn: conn, location: %Location{id: id} = location} do
-      conn = put conn, location_path(conn, :update, location), location: @update_attrs
+    test "renders location when data is valid", %{
+      conn: conn,
+      location: %Location{id: id} = location
+    } do
+      conn = put(conn, location_path(conn, :update, location), location: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
-      conn = get conn, location_path(conn, :show, id)
+      conn = get(conn, location_path(conn, :show, id))
+
       assert json_response(conn, 200)["data"] == %{
-        "id" => id,
-        "city" => "some updated city",
-        "cords" => "some updated cords",
-        "state" => "some updated state"}
+               "id" => id,
+               "city" => "some updated city",
+               "cords" => "some updated cords",
+               "state" => "some updated state"
+             }
     end
 
     test "renders errors when data is invalid", %{conn: conn, location: location} do
-      conn = put conn, location_path(conn, :update, location), location: @invalid_attrs
+      conn = put(conn, location_path(conn, :update, location), location: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -68,11 +79,12 @@ defmodule WeatherDiffWeb.LocationControllerTest do
     setup [:create_location]
 
     test "deletes chosen location", %{conn: conn, location: location} do
-      conn = delete conn, location_path(conn, :delete, location)
+      conn = delete(conn, location_path(conn, :delete, location))
       assert response(conn, 204)
-      assert_error_sent 404, fn ->
-        get conn, location_path(conn, :show, location)
-      end
+
+      assert_error_sent(404, fn ->
+        get(conn, location_path(conn, :show, location))
+      end)
     end
   end
 

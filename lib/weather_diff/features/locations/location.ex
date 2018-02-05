@@ -3,15 +3,14 @@ defmodule WeatherDiff.Features.Location do
   import Ecto.Changeset
   alias WeatherDiff.Features.Location
 
-
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
 
   schema "locations" do
-    field :city, :string
-    field :cords, :string
-    field :state, :string
-    belongs_to :user, WeatherDiff.Features.User
+    field(:city, :string)
+    field(:cords, :string)
+    field(:state, :string)
+    belongs_to(:user, WeatherDiff.Features.User)
 
     timestamps()
   end
