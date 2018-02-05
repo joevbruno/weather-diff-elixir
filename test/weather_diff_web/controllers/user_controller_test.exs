@@ -1,15 +1,15 @@
 defmodule WeatherDiffWeb.UserControllerTest do
   use WeatherDiffWeb.ConnCase
 
-  alias WeatherDiff.Weather
-  alias WeatherDiff.Weather.User
+  alias WeatherDiff.Features.Users
+  alias WeatherDiff.Features.User
 
   @create_attrs %{first_name: "some first_name", last_name: "some last_name"}
   @update_attrs %{first_name: "some updated first_name", last_name: "some updated last_name"}
   @invalid_attrs %{first_name: nil, last_name: nil}
 
   def fixture(:user) do
-    {:ok, user} = Weather.create_user(@create_attrs)
+    {:ok, user} = Users.create_user(@create_attrs)
     user
   end
 

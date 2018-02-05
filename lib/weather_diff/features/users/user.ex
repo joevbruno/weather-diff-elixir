@@ -24,7 +24,7 @@ defmodule WeatherDiff.Features.User do
     field(:bio, :string)
     field(:image, :string)
 
-    field(:login_attempts, :int, default: 0)
+    field(:login_attempts, :integer, default: 0)
     field(:status, :string, default: "active")
     field(:processing, :boolean, default: false)
 

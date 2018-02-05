@@ -1,8 +1,8 @@
 defmodule WeatherDiffWeb.LocationControllerTest do
   use WeatherDiffWeb.ConnCase
 
-  alias WeatherDiff.Weather
-  alias WeatherDiff.Weather.Location
+  alias WeatherDiff.Features.Locations
+  alias WeatherDiff.Features.Location
 
   @create_attrs %{city: "some city", cords: "some cords", state: "some state"}
   @update_attrs %{
@@ -13,7 +13,7 @@ defmodule WeatherDiffWeb.LocationControllerTest do
   @invalid_attrs %{city: nil, cords: nil, state: nil}
 
   def fixture(:location) do
-    {:ok, location} = Weather.create_location(@create_attrs)
+    {:ok, location} = Locations.create_location(@create_attrs)
     location
   end
 

@@ -20,11 +20,11 @@ defmodule WeatherDiff.Auth.Track do
   end
 
   # Track a log in denied event
-  def track_log_in_denied(conn, auth) do
+  def track_log_in_denied(conn, user) do
     Logger.debug("track log in denied")
 
     conn
-    |> track("log-in-denied", nil, auth)
+    |> track("log-in-denied", user)
   end
 
   # This function takes a connection (conn), verb, and optionally user and auth.
@@ -38,23 +38,23 @@ defmodule WeatherDiff.Auth.Track do
     remote_ips = Plug.Conn.get_req_header(conn, "x-forwarded-for")
     remote_ip = List.first(remote_ips)
 
-    # If there was nothing in X-Forarded-For, use the remote IP directly
-    unless remote_ip do
-      # Extract the remote IP from the connection
-      remote_ip_as_tuple = conn.remote_ip
+    # # If there was nothing in X-Forarded-For, use the remote IP directly
+    # unless remote_ip do
+    #   # Extract the remote IP from the connection
+    #   remote_ip_as_tuple = conn.remote_ip
 
-      # The remote IP is a tuple like `{127, 0, 0, 1}`, so we need join it into
-      # a string for the API. Note that this works for IPv4 - IPv6 support is
-      # exercise for the reader!
-      remote_ip = Enum.join(Tuple.to_list(remote_ip_as_tuple), ".")
-    end
+    #   # The remote IP is a tuple like `{127, 0, 0, 1}`, so we need join it into
+    #   # a string for the API. Note that this works for IPv4 - IPv6 support is
+    #   # exercise for the reader!
+    #   remote_ip = Enum.join(Tuple.to_list(remote_ip_as_tuple), ".")
+    # end
 
     # Default values for our API attributes
-    user_id = nil
+    user_id = user
 
-    if user do
-      user_id = user.id
-    end
+    # if user do
+    #   user_id = user.id
+    # end
 
     # Construct the request body
     body = %{
@@ -63,5 +63,7 @@ defmodule WeatherDiff.Auth.Track do
       user_agent: user_agent,
       user_id: user_id
     }
+
+    body
   end
 end
